@@ -13,10 +13,10 @@ using namespace sf;
 
 
 /*
-* Êîîðäèíàöèÿ=======
-* shape.setPosition(800, 500); Ïåðâûé àðãóìåíò ðàñïîëîæåíèå ïî ãîðèçîíòàëè , à âòîðîé àðãóìåíò ïî âåðòèêàëè
-* ×åì çíà÷åíèå âûñîòû âûøå òåì íèæå îáüåêò
-* ×åì çíà÷åíèå ãîðèçîíòàëè íèæå òåì ëåâåå îáüåêò
+* ÐšÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ†Ð¸Ñ=======
+* shape.setPosition(800, 500); ÐŸÐµÑ€Ð²Ñ‹Ð¹ Ð°Ñ€Ð³ÑƒÐ¼ÐµÐ½Ñ‚ Ñ€Ð°ÑÐ¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ð¾ Ð³Ð¾Ñ€Ð¸Ð·Ð¾Ð½Ñ‚Ð°Ð»Ð¸ , Ð° Ð²Ñ‚Ð¾Ñ€Ð¾Ð¹ Ð°Ñ€Ð³ÑƒÐ¼ÐµÐ½Ñ‚ Ð¿Ð¾ Ð²ÐµÑ€Ñ‚Ð¸ÐºÐ°Ð»Ð¸
+* Ð§ÐµÐ¼ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ð²Ñ‹ÑÐ¾Ñ‚Ñ‹ Ð²Ñ‹ÑˆÐµ Ñ‚ÐµÐ¼ Ð½Ð¸Ð¶Ðµ Ð¾Ð±ÑŒÐµÐºÑ‚
+* Ð§ÐµÐ¼ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ð³Ð¾Ñ€Ð¸Ð·Ð¾Ð½Ñ‚Ð°Ð»Ð¸ Ð½Ð¸Ð¶Ðµ Ñ‚ÐµÐ¼ Ð»ÐµÐ²ÐµÐµ Ð¾Ð±ÑŒÐµÐºÑ‚
 * ===================
 */
 
@@ -32,14 +32,14 @@ using namespace sf;
 
 int main()
 {
-    //Ìóçûêà
+    //ÐœÑƒÐ·Ñ‹ÐºÐ°
     Music music;
     music.openFromFile("audio/background.ogg");
     music.play();
-    //Øðèôò äëÿ òåêñòà
+    //Ð¨Ñ€Ð¸Ñ„Ñ‚ Ð´Ð»Ñ Ñ‚ÐµÐºÑÑ‚Ð°
     Font MainFont;
     MainFont.loadFromFile("fonts/Nevduplenysh.otf");
-    //Ïîêàç FPS
+    //ÐŸÐ¾ÐºÐ°Ð· FPS
     Text FpsText("", MainFont, 35);
     FpsText.setPosition(17, 1);
     FPS fps;
@@ -47,45 +47,45 @@ int main()
 
 
 
-    //Ñîçäàë îêíî
+    //Ð¡Ð¾Ð·Ð´Ð°Ð» Ð¾ÐºÐ½Ð¾
     RenderWindow window(sf::VideoMode(1600, 900), "2Qube");
 
 
  
 
     
-    //Ñîçäàþ òåêñòóðó
+    //Ð¡Ð¾Ð·Ð´Ð°ÑŽ Ñ‚ÐµÐºÑÑ‚ÑƒÑ€Ñƒ
     Texture groundTexture;
     groundTexture.loadFromFile("images/ground.png");
 
-    //Ñîçäàþ íîâûé ñïðàéò
+    //Ð¡Ð¾Ð·Ð´Ð°ÑŽ Ð½Ð¾Ð²Ñ‹Ð¹ ÑÐ¿Ñ€Ð°Ð¹Ñ‚
         Sprite groundSprite;
-        //Ïðèâÿçûâàþ òåêñòóðó
+        //ÐŸÑ€Ð¸Ð²ÑÐ·Ñ‹Ð²Ð°ÑŽ Ñ‚ÐµÐºÑÑ‚ÑƒÑ€Ñƒ
         groundSprite.setTexture(groundTexture);
-        //Ìàñøòàáèðóþ è ïîçèöèîííèðóþ
+        //ÐœÐ°ÑÑˆÑ‚Ð°Ð±Ð¸Ñ€ÑƒÑŽ Ð¸ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ð¾Ð½Ð½Ð¸Ñ€ÑƒÑŽ
         groundSprite.setPosition(1, 650);
         groundSprite.setScale(1, 0.25f);
 
-        //Ñîçäàþ òåêñòóðó
+        //Ð¡Ð¾Ð·Ð´Ð°ÑŽ Ñ‚ÐµÐºÑÑ‚ÑƒÑ€Ñƒ
         Texture backgroundTexture;
         backgroundTexture.loadFromFile("images/background.jpg");
 
-        //Ñîçäàþ íîâûé ñïðàéò
+        //Ð¡Ð¾Ð·Ð´Ð°ÑŽ Ð½Ð¾Ð²Ñ‹Ð¹ ÑÐ¿Ñ€Ð°Ð¹Ñ‚
         Sprite backgroundSprite;
-        //Ïðèâÿçûâàþ òåêñòóðó
+        //ÐŸÑ€Ð¸Ð²ÑÐ·Ñ‹Ð²Ð°ÑŽ Ñ‚ÐµÐºÑÑ‚ÑƒÑ€Ñƒ
         backgroundSprite.setTexture(backgroundTexture);
-        //Ìàñøòàáèðóþ è ïîçèöèîííèðóþ
+        //ÐœÐ°ÑÑˆÑ‚Ð°Ð±Ð¸Ñ€ÑƒÑŽ Ð¸ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ð¾Ð½Ð½Ð¸Ñ€ÑƒÑŽ
         backgroundSprite.setPosition(0, -430);
   
-        //Ñîçäàþ òåêñòóðó
+        //Ð¡Ð¾Ð·Ð´Ð°ÑŽ Ñ‚ÐµÐºÑÑ‚ÑƒÑ€Ñƒ
         Texture playerTexture;
         playerTexture.loadFromFile("images/player.png");
 
-        //Ñîçäàþ íîâûé ñïðàéò
+        //Ð¡Ð¾Ð·Ð´Ð°ÑŽ Ð½Ð¾Ð²Ñ‹Ð¹ ÑÐ¿Ñ€Ð°Ð¹Ñ‚
         Sprite playerSprite;
-        //Ïðèâÿçûâàþ òåêñòóðó
+        //ÐŸÑ€Ð¸Ð²ÑÐ·Ñ‹Ð²Ð°ÑŽ Ñ‚ÐµÐºÑÑ‚ÑƒÑ€Ñƒ
         playerSprite.setTexture(playerTexture);
-        //Ìàñøòàáèðóþ è ïîçèöèîííèðóþ
+        //ÐœÐ°ÑÑˆÑ‚Ð°Ð±Ð¸Ñ€ÑƒÑŽ Ð¸ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ð¾Ð½Ð½Ð¸Ñ€ÑƒÑŽ
         playerSprite.setPosition(550, 555);
         playerSprite.setScale(0.1, 0.10f);
 
@@ -93,7 +93,7 @@ int main()
 
 
 
-    //Òåñòîâûé êîä
+    //Ð¢ÐµÑÑ‚Ð¾Ð²Ñ‹Ð¹ ÐºÐ¾Ð´
    /* CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Yellow);
     shape.setPosition(690,300);*/
@@ -102,7 +102,7 @@ int main()
 
 
 
-    //Ãëàâíûé öèêë
+    //Ð“Ð»Ð°Ð²Ð½Ñ‹Ð¹ Ñ†Ð¸ÐºÐ»
     while (window.isOpen())
     {
 
@@ -123,9 +123,9 @@ int main()
 
 
 
-        //Óïðàâëåíèå
-        if (Keyboard::isKeyPressed(Keyboard::A)) { playerSprite.move(-0.7, 0); } //ïåðâàÿ êîîðäèíàòà Õ îòðèöàòåëüíà =>èä¸ì âëåâî
-        if (Keyboard::isKeyPressed(Keyboard::D)) { playerSprite.move(0.7, 0); } //ïåðâàÿ êîîðäèíàòà Õ ïîëîæèòåëüíà =>èä¸ì âïðàâî
+        //Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ
+        if (Keyboard::isKeyPressed(Keyboard::A)) { playerSprite.move(-0.7, 0); } //Ð¿ÐµÑ€Ð²Ð°Ñ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ð° Ð¥ Ð¾Ñ‚Ñ€Ð¸Ñ†Ð°Ñ‚ÐµÐ»ÑŒÐ½Ð° =>Ð¸Ð´Ñ‘Ð¼ Ð²Ð»ÐµÐ²Ð¾
+        if (Keyboard::isKeyPressed(Keyboard::D)) { playerSprite.move(0.7, 0); } //Ð¿ÐµÑ€Ð²Ð°Ñ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ð° Ð¥ Ð¿Ð¾Ð»Ð¾Ð¶Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð° =>Ð¸Ð´Ñ‘Ð¼ Ð²Ð¿Ñ€Ð°Ð²Ð¾
      
 
 
