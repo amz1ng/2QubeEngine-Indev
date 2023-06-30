@@ -1,3 +1,16 @@
+/*
+* Engine.cpp
+* Вы просматриваете исходники 2D движка 2Qube  и можете свободно их использовать
+* --AMAZING
+* 
+*/
+
+
+
+
+
+
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
