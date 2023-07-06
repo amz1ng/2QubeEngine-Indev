@@ -9,8 +9,8 @@
 
 
 #include <SFML/Graphics.hpp>
-#include "imgui/imgui.h"
-#include "imgui/imgui-SFML.h"
+//#include "imgui/imgui.h"
+//#include "imgui/imgui-SFML.h"
 #include <SFML/Audio.hpp>
 #include <iostream>
 #include <sstream>
@@ -32,12 +32,11 @@ using namespace sf;
 
 
 
-//Переменные
 
 
 
 FPS fps;
-
+//Сорздаю окно
 RenderWindow window(VideoMode(1600, 900), "2Qube");
 
 
@@ -46,7 +45,7 @@ RenderWindow window(VideoMode(1600, 900), "2Qube");
 //Сценв 1 Главная сцена
 int Scene1()
 {
-    ImGui::SFML::Init(window);
+   /* ImGui::SFML::Init(window);*/
     //Отчистка экрана
     window.clear();
     //Шрифт для текста
@@ -117,7 +116,7 @@ int Scene1()
         sf::Event event;
         while (window.pollEvent(event))
         {
-            ImGui::SFML::ProcessEvent(event);
+          /*  ImGui::SFML::ProcessEvent(event);*/
             if (event.type == sf::Event::Closed)
                 window.close();
         }
@@ -130,7 +129,7 @@ int Scene1()
 
 
 
-        ImGui::SFML::Update(window, deltaClock.restart());
+     /*   ImGui::SFML::Update(window, deltaClock.restart());*/
 
 
 
@@ -144,7 +143,7 @@ int Scene1()
         window.draw(backgroundSprite);
         window.draw(playerSprite);
         window.draw(FpsText);
-        ImGui::SFML::Render(window); 
+        /*ImGui::SFML::Render(window); */
         window.display();
     }
 
@@ -155,7 +154,7 @@ int Scene1()
 //Сцена 2 Меню
 int Scene2()
 {
-    ImGui::SFML::Init(window);
+  /*  ImGui::SFML::Init(window);*/
     //Отчистка экрана
     window.clear();
     RectangleShape buttonplay(Vector2f(200, 50));
@@ -198,11 +197,11 @@ int Scene2()
         sf::Event event;
         while (window.pollEvent(event))
         {
-            ImGui::SFML::ProcessEvent(event);
+           /* ImGui::SFML::ProcessEvent(event);*/
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        ImGui::SFML::Update(window, deltaClock.restart());
+       /* ImGui::SFML::Update(window, deltaClock.restart());*/
 
 
 
@@ -222,7 +221,7 @@ int Scene2()
         window.draw(Title);
    
        // window.draw(buttonplay);
-        ImGui::SFML::Render(window);
+      /*  ImGui::SFML::Render(window);*/
         window.display();
     }
     return 0;
@@ -235,6 +234,8 @@ int main()
 {
     //Вызов сцен
  /* Scene1();*/    //Главная сцена
-    Scene2(); //Меню
+    Scene2();
   return 0;
 }
+
+
