@@ -36,7 +36,7 @@ using namespace sf;
 
 
 FPS fps;
-//Сорздаю окно
+//Создаю окно
 RenderWindow window(VideoMode(1600, 900), "2Qube");
 
 
