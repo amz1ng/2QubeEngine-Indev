@@ -35,8 +35,9 @@ using namespace sf;
 
 
 
+//Переменная просчета FPS
 FPS fps;
-//Создаю окно
+//Создаю окно с расширением 1600 на 900 и задаю название 2Qube
 RenderWindow window(VideoMode(1600, 900), "2Qube");
 
 
@@ -48,63 +49,78 @@ int Scene1()
    /* ImGui::SFML::Init(window);*/
     //Отчистка экрана
     window.clear();
+    
+
+    //Тут создаю переменные этой сцены
+    //===========================================================
     //Шрифт для текста
     Font MainFont;
+    //Загружаю шрифт
     MainFont.loadFromFile("fonts/Nevduplenysh.otf");
+    //Создаю текстуру пола
     Texture groundTexture;
+    //Создаю текстуру игрока
     Texture playerTexture;
+    //Создаю спрайт игрока
     Sprite playerSprite;
+    //Создаю текстуру фона
     Texture backgroundTexture;
+    //Создаю спрайт фона
     Sprite backgroundSprite;
+    //Создаю спрайт земли
     Sprite groundSprite;
+    //Время
     Clock deltaClock;
+    //Переменная типа Text , в которой будем храниться и выводиться FPS
+    Text FpsText("", MainFont, 35);
     //Музыка
     Music music;
+    //===========================================================
+    
+
+
+    //Здесь всё подгружаю
+    //===========================================================
+    //Подгружаю музыку
     music.openFromFile("audio/background.ogg");
-    music.play();
-    
- 
-    //Показ FPS
-    Text FpsText("", MainFont, 35);
-    FpsText.setPosition(17, 1);
-    
     //Загружаю текстуру пола
     groundTexture.loadFromFile("images/ground.png");
-
- 
-
-        //Привязываю текстуру
-    groundSprite.setTexture(groundTexture);
-    //Масштабирую и позиционнирую
-    groundSprite.setPosition(1, 650);
-    groundSprite.setScale(1, 0.25f);
-
-    
     //Загружаю текстуру фона
     backgroundTexture.loadFromFile("images/background.jpg");
-
-  
-
-    //Привязываю текстуру
-    backgroundSprite.setTexture(backgroundTexture);
-    //Масштабирую и позиционнирую
-    backgroundSprite.setPosition(0, -430);
-
     //Загружаю текстуру игрока
     playerTexture.loadFromFile("images/player.png");
-
- 
-
-    //Привязываю текстуру
-    playerSprite.setTexture(playerTexture);
-    //Масштабирую и позиционнирую
+    //===========================================================
+   
+  
+    //Здесь все позиционирую и масштабирую
+    //===========================================================
+    //Позиционирую текст для вывода FPS
+    FpsText.setPosition(17, 1);
+    //Масштабирую и позиционнирую пол
+    groundSprite.setPosition(1, 650);
+    groundSprite.setScale(1, 0.25f);
+    //Позиционнирую фон
+    backgroundSprite.setPosition(0, -430);
+    //Позиционнирую и масштабирую игрока
     playerSprite.setPosition(550, 555);
     playerSprite.setScale(0.1, 0.10f);
+    //===========================================================
 
-    //Главнфй цикл
+    //Здесь привязываю текстуры к спрайтам
+    //===========================================================
+    //Привязываю текстуру пола
+    groundSprite.setTexture(groundTexture);
+    //Привязываю текстуру фона
+    backgroundSprite.setTexture(backgroundTexture);
+    //Привязываю текстуру игрока
+    playerSprite.setTexture(playerTexture);
+    
+    
+
+    //Главный цикл
     while (window.isOpen())
     {
-        //Выволд FPS
+        //Просчет FPS
         fps.update();
         std::ostringstream ss;
         ss << fps.getFPS();
@@ -135,7 +151,8 @@ int Scene1()
 
 
 
-
+        //Проигрываю музыку
+        music.play();
 
         // Очистка экрана и вывод обьектов
         window.clear();
