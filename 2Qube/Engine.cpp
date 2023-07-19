@@ -7,7 +7,6 @@
 #include <string>
 #include "fps.cpp"
 //#include "GUI/button.hpp"
-#include "framework/Fube.h"
 #include "map/map.h"
 
 
@@ -221,7 +220,7 @@ int Scene1()
 
 
 
-    createText("Hello World", MainFont, 35);
+   
 
     music.play();
     //Главный цикл
