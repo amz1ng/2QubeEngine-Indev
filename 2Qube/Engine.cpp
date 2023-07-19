@@ -1,13 +1,3 @@
-/*
-* Engine.cpp
-* Вы просматриваете исходники 2D движка 2Qube  и можете свободно их использовать
-* --AMAZING
-* 
-*/
-
-
-
-
 #include <SFML/Graphics.hpp>
 //#include "imgui/imgui.h"
 //#include "imgui/imgui-SFML.h"
@@ -16,10 +6,13 @@
 #include <sstream>
 #include <string>
 #include "fps.cpp"
+//#include "GUI/button.hpp"
+#include "framework/Fube.h"
+#include "map/map.h"
+
 
 using namespace sf;
-
-
+using namespace std;
 
 
 /*
@@ -38,7 +31,118 @@ using namespace sf;
 //Переменная просчета FPS
 FPS fps;
 //Создаю окно с расширением 1600 на 900 и задаю название 2Qube
-RenderWindow window(VideoMode(1600, 900), "2Qube");
+extern RenderWindow window(VideoMode(1600, 900), "2Qube");
+
+
+int Scene0()
+{
+ //Отчистка экрана
+    window.clear(Color(66, 170, 255));
+    //Тут создаю переменные этой сцены
+    //===========================================================
+    //Шрифт для текста
+    Font MainFont;
+    //Текст для FPS
+    Text FpsText("", MainFont, 35);
+    Clock deltaClock;
+    //Создаю текстуру игрока
+    Texture playerTexture2;
+    //Создаю спрайт игрока
+    Sprite playerSprite2;
+    //Объект изображения для карты
+    Image map_image;
+    //Текстура карты
+    Texture map;
+    //Создаём спрайт для карты
+    Sprite s_map;
+    View view = window.getView();
+   // View view = window.getView
+
+    //===========================================================
+
+    //Здесь всё подгружаю
+    //===========================================================
+     
+    //Загружаю шрифт
+    MainFont.loadFromFile("fonts/Nevduplenysh.otf");
+    //Загружаем файл для карты
+    map_image.loadFromFile("images/map.png");
+    //Заряжаем текстуру картинкой
+    map.loadFromImage(map_image);
+    //Загркжаю текстуру игрока
+    playerTexture2.loadFromFile("images/player.png");
+    //===========================================================
+
+    //Здесь привязываю текстуры к спрайтам
+    //===========================================================
+    //Привязываю текстуру карты к спрайту
+    s_map.setTexture(map);
+    //Привязываю текстуру игрока к спрайту
+    playerSprite2.setTexture(playerTexture2);
+    //===========================================================
+     
+    //Здесь все позиционирую и масштабирую
+    //===========================================================
+    //Позиционнирую и масштабирую игрока
+    playerSprite2.setPosition(550, 765);
+    playerSprite2.setScale(0.1, 0.10f);
+    //===========================================================
+
+    //Главный цикл
+    while (window.isOpen())
+    {
+    
+
+        //Вывод FPS
+        fps.update();
+        std::ostringstream ss;
+        ss << fps.getFPS();
+        FpsText.setString(ss.str() + " FPS");
+
+
+        //Управление
+        if (Keyboard::isKeyPressed(Keyboard::A)) { playerSprite2.move(-0.7, 0); } //первая координата Х отрицательна =>идём влево
+        if (Keyboard::isKeyPressed(Keyboard::D)) { playerSprite2.move(0.7, 0); } //первая координата Х положительна =>идём вправо
+
+
+
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+
+            if (event.type == sf::Event::Closed)
+                window.close();
+
+
+           
+        }
+
+        float playerPosX = playerSprite2.getPosition().x;
+        float playerPosY = playerSprite2.getPosition().y;
+
+       
+        view.setCenter(playerPosX,420);
+        window.setView(view);
+
+        //Очистка экрана и вывод обьектов
+        window.clear(Color(66, 170, 255));
+        for (int i = 0; i < HEIGHT_MAP; i++)
+            for (int j = 0; j < WIDTH_MAP; j++)
+            {
+                if (TileMap[i][j] == ' ')  s_map.setTextureRect(IntRect(96, 0, 32, 32)); //если встретили символ пробел, то рисуем 1й квадратик
+                
+                if ((TileMap[i][j] == '0')) s_map.setTextureRect(IntRect(64, 0, 32, 32));//если встретили символ 0, то рисуем 3й квадратик
+
+
+                s_map.setPosition(j * 32, i * 32);//по сути раскидывает квадратики, превращая в карту. то есть задает каждому из них позицию. если убрать, то вся карта нарисуется в одном квадрате 32*32 и мы увидим один квадрат
+
+                window.draw(s_map);//рисуем квадратики на экран
+            }
+        window.draw(playerSprite2);
+        window.display();
+    }
+    return 0;
+}
 
 
 
@@ -46,10 +150,10 @@ RenderWindow window(VideoMode(1600, 900), "2Qube");
 //Сценв 1 Главная сцена
 int Scene1()
 {
-   /* ImGui::SFML::Init(window);*/
-    //Отчистка экрана
+    /* ImGui::SFML::Init(window);*/
+     //Отчистка экрана
     window.clear();
-    
+
 
     //Тут создаю переменные этой сцены
     //===========================================================
@@ -76,7 +180,7 @@ int Scene1()
     //Музыка
     Music music;
     //===========================================================
-    
+
 
 
     //Здесь всё подгружаю
@@ -90,8 +194,8 @@ int Scene1()
     //Загружаю текстуру игрока
     playerTexture.loadFromFile("images/player.png");
     //===========================================================
-   
-  
+
+
     //Здесь все позиционирую и масштабирую
     //===========================================================
     //Позиционирую текст для вывода FPS
@@ -114,9 +218,12 @@ int Scene1()
     backgroundSprite.setTexture(backgroundTexture);
     //Привязываю текстуру игрока
     playerSprite.setTexture(playerTexture);
-    
-    
 
+
+
+    createText("Hello World", MainFont, 35);
+
+    music.play();
     //Главный цикл
     while (window.isOpen())
     {
@@ -132,7 +239,7 @@ int Scene1()
         sf::Event event;
         while (window.pollEvent(event))
         {
-          /*  ImGui::SFML::ProcessEvent(event);*/
+            /*  ImGui::SFML::ProcessEvent(event);*/
             if (event.type == sf::Event::Closed)
                 window.close();
         }
@@ -152,7 +259,7 @@ int Scene1()
 
 
         //Проигрываю музыку
-        music.play();
+
 
         // Очистка экрана и вывод обьектов
         window.clear();
@@ -160,22 +267,23 @@ int Scene1()
         window.draw(backgroundSprite);
         window.draw(playerSprite);
         window.draw(FpsText);
-        /*ImGui::SFML::Render(window); */
+        //   window.draw(test);
+
+
+           /*ImGui::SFML::Render(window); */
         window.display();
     }
 
     return 0;
 }
 
-
 //Сцена 2 Меню
 int Scene2()
 {
-  /*  ImGui::SFML::Init(window);*/
-    //Отчистка экрана
+    /*  ImGui::SFML::Init(window);*/
+      //Отчистка экрана
     window.clear();
-    RectangleShape buttonplay(Vector2f(200, 50));
-    buttonplay.setPosition(450, 450);
+  
     //Шрифт для текста
     Font MainFont;
     MainFont.loadFromFile("fonts/Nevduplenysh.otf");
@@ -196,12 +304,22 @@ int Scene2()
     backgroundSprite.setTexture(backgroundTexture);
     Clock deltaClock;
 
-
-
+    //Создание кнопки
+    RectangleShape ButtonShape(Vector2f(200, 50));
+    ButtonShape.setPosition(450, 450);
+    ButtonShape.setFillColor(sf::Color(100, 250, 50));
+    //Текст на кнопке
+    Text TextButton("Play", MainFont,50);
+    //Позиционирую
+   TextButton.setPosition(520, 445);
 
     //Главный цикл
     while (window.isOpen())
     {
+        //Получаю и записываю позицию мышки в Вектор
+        Vector2i mousePos = Mouse::getPosition(window);
+
+
         //Вывод FPS
         fps.update();
         std::ostringstream ss;
@@ -209,36 +327,40 @@ int Scene2()
         FpsText.setString(ss.str() + " FPS");
 
 
-     
+      
+
 
         sf::Event event;
         while (window.pollEvent(event))
         {
-           /* ImGui::SFML::ProcessEvent(event);*/
+
             if (event.type == sf::Event::Closed)
                 window.close();
+
+
+            //Слушатель кнопки Play
+          if(event.type==Event::MouseButtonPressed)
+              if(event.key.code==Mouse::Left)
+                if (ButtonShape.getGlobalBounds().contains(mousePos.x, mousePos.y))
+                {
+                   Scene0();
+                   
+                }
+
+
         }
-       /* ImGui::SFML::Update(window, deltaClock.restart());*/
+      
+     
 
 
-
-        //if (ImGui::Button("Update window title")) {
-        //    // этот код выполняется, когда юзер жмёт на кнопку
-        //    // здесь можно было бы написать 
-        //    // if(ImGui::InputText(...))
-
-        //}
-
-
-
-         //Очистка экрана и вывод обьектов
+        //Очистка экрана и вывод обьектов
         window.clear();
         window.draw(backgroundSprite);
         window.draw(FpsText);
+        window.draw(ButtonShape);
         window.draw(Title);
-   
-       // window.draw(buttonplay);
-      /*  ImGui::SFML::Render(window);*/
+        window.draw(TextButton);
+
         window.display();
     }
     return 0;
@@ -247,12 +369,14 @@ int Scene2()
 
 
 
+
+
+
+
 int main()
 {
     //Вызов сцен
- /* Scene1();*/    //Главная сцена
+ /* Scene1(); */   //Главная сцена
     Scene2();
-  return 0;
+    return 0;
 }
-
-
